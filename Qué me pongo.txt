@@ -1,0 +1,82 @@
+enum Color{ AZUL,ROJO,AMARILLO,VERDE,NEGRO,BLANCO,NARANJA,VIOLETA,NADA; }
+
+enum Tela{ LANA,ALGODON,FIBRA,NADA; }
+
+enum Categoria{ PARTESUPERIOR,CALZADO,PARTEINFERIOR,ACCESORIO,NADA; }
+
+abstract class Tipo{
+	Categoria categoria;
+	abstract boolean coindiceCategoria();
+}
+
+class Prenda{
+	Tipo tipo;
+	Categoria categoria;
+	Tela tela;
+	Color colorPrincipal;
+	Color colorSecundario;
+	
+	Prenda(Tipo tipo, Categoria categoria, Tela tela, Color colorPrincipal, Color colorSecundario){
+		this.tipo = tipo;
+		this.categoria = categoria;
+		this.tela = tela;
+		this.colorPrincipal = colorPrincipal;
+		this.colorSecundario = colorSecundario;
+	}
+	
+	Tipo getTipo(){return tipo;}
+	Categoria getCategoria(){return categoria;}
+	Tela getTela(){return tela;}
+	Color getColorPrincipal(){return colorPrincipal;}
+	Color getColorSecundario(){return colorSecundario;}
+}
+
+class QueMePongo{
+	List<Prenda> atuendo;
+	
+	List<Prenda> getPrendas(){return atuendo;}
+	String cargarPrenda(Prenda prenda){
+	
+		//SI POR EJEMPLO UNA REMERA TIENE LA CATEGORIA DE CALZADO, NO SE ANIADE AL ATUENDO
+		if(!prenda.tipo.coindiceCategoria()){
+			throw new RuntimeException("La categoria de la prenda no es la real");
+		}
+		
+		if(prenda.getCategoria()==NADA || prenda.getColorPrincipal()==NADA || prenda.getTela()==NADA){
+			throw new RuntimeException("No se puede agregar la prenda, ya que no cumple las condiciones.");
+		}
+		
+		atuendo.add(prenda);
+		if(prenda.colorPrincipal() == prenda.colorSecundario()){
+			return "El tipo de la prenda es " + prenda.getTipo() + ", su categoria es " + prenda.getCategoria() + ", su tela es " + prenda.getTela() + "su color principal es " + prenda.getColorPrincipal() + " y no tiene color secundario."; 
+		}
+		else
+		{
+			return "El tipo de la prenda es " + prenda.getTipo() + ", su categoria es " + prenda.getCategoria() + ", su tela es " + prenda.getTela() + "su color principal es " + prenda.getColorPrincipal() + " y el secundario " + prenda.getColorSecundario();
+		}
+	}
+}
+
+class Zapato extends Tipo{
+	boolean coindiceCategoria(){ return categoria == CALZADO; }
+}
+
+class Camisa extends Tipo{
+	boolean coindiceCategoria(){ return categoria == PARTESUPERIOR; }
+}
+
+class Pantalon extends Tipo{
+	boolean coindiceCategoria(){ return categoria == PARTEINFERIOR; }
+}
+
+class Remera extends Tipo{
+	boolean coindiceCategoria(){ return categoria == PARTESUPERIOR; }
+}
+
+class Medias extends Tipo{
+	boolean coindiceCategoria(){ return categoria == PARTEINFERIOR; }
+}
+
+class Anteojos extends Tipo{
+	boolean coindiceCategoria(){ return categoria == ACCESORIO; }
+}
