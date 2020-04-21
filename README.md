@@ -1,1 +1,1 @@
-# Que me pongo? - Segunda iteracion
+# Qué me pongo? - Segunda iteracion
