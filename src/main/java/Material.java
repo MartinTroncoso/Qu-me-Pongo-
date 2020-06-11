@@ -1,0 +1,3 @@
+public enum Material {
+	CUERO,FIBRA,ALGODON,LANA,VIDRIO,PLASTICO;
+}
